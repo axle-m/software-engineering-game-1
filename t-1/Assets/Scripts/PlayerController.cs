@@ -11,12 +11,12 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         moveAction = InputSystem.actions.FindAction("Move");
-        dashAction = InputSystem.actions.FindAction("Dash");
+        // dashAction = InputSystem.actions.FindAction("Dash");
         sprintAction = InputSystem.actions.FindAction("Sprint");
         attackAction = InputSystem.actions.FindAction("Attack");
 
         moveAction.Enable();
-        dashAction.Enable();
+        // dashAction.Enable();
         sprintAction.Enable();
         attackAction.Enable();
     }
