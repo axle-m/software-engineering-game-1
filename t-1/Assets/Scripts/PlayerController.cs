@@ -53,8 +53,7 @@ public class PlayerController : MonoBehaviour
         UpdateState();
         Move();
         Dash();
-        // Sprint();
-        // Attack();
+        Attack();
     }
 
     void GetInput()
@@ -79,13 +78,14 @@ public class PlayerController : MonoBehaviour
         Vector3 mouseWorld = Camera.main.ScreenToWorldPoint(mouseScreen);
         Vector2 dir = (Vector2)mouseWorld - (Vector2)transform.position;
 
+#pragma warning disable CS8602
+    /*  Deference of a possibly null reference warning:
+        OnDrawGizmos runs when attackPoint may be null.
+        Making attackPoint nullable resolves the issue, but leads to annoying warnings so we suppress them temporarily. 
+        This is to be removed once we no longer need to see gizmos for debugging. */
 
-        // This is to temporarily avoid a possible null reference exception
-        // OnDrawGizmos runs before Start, so attackPoint may be null then. Making it nullable resolves the issue, 
-        // but leads to annoying warnings so we suppress them temporarily.
-#pragma warning disable CS8602 // Dereference of a possibly null reference.
         attackPoint.position = transform.position + (Vector3)(dir.normalized * attackRange);
-#pragma warning restore CS8602 // Dereference of a possibly null reference.
+#pragma warning restore CS8602
     }
 
     void Move()
@@ -100,7 +100,7 @@ public class PlayerController : MonoBehaviour
 
     void Dash()
     {
-        if(dashAction.triggered)
+        if(dashAction.triggered && !playerStateList.Dashing)
             StartCoroutine(DashCoroutine());
     }
     private IEnumerator DashCoroutine()
@@ -113,5 +113,21 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(dashTimeMS / 1000f);
         moveSpeed = originalSpeed;
         playerStateList.Dashing = false;
+    }
+
+    void Attack()
+    {
+        if(attackAction.triggered)
+        {
+            StartCoroutine(AttackCoroutine());
+        }
+    }
+
+    private IEnumerator AttackCoroutine()
+    {
+        // Attack logic here
+        Debug.Log("Attack triggered");
+
+        yield return null;
     }
 }
