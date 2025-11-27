@@ -123,11 +123,38 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private IEnumerator AttackCoroutine()
-    {
-        // Attack logic here
-        Debug.Log("Attack triggered");
+    private bool canAttack = true; // prevents spamming
 
-        yield return null;
+private IEnumerator AttackCoroutine()
+{
+    if (!canAttack) yield break; // exit if still in cooldown
+    canAttack = false;
+
+    // Detect enemies in the attack range
+    Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(
+        attackPoint.position,  // center of attack
+        attackRange,           // radius
+        enemyLayers            // layer mask for enemies
+    );
+
+    foreach (Collider2D enemyCollider in hitEnemies)
+{
+    Debug.Log("Hit: " + enemyCollider.name);
+    EnemyHealth enemyHealth = enemyCollider.GetComponent<EnemyHealth>();
+    if (enemyHealth != null)
+    {
+        enemyHealth.TakeDamage(25);
     }
+}
+
+
+    
+    Debug.Log("Attack executed!");
+
+    
+    yield return new WaitForSeconds(0.5f);
+
+    canAttack = true; 
+}
+
 }
