@@ -3,54 +3,47 @@ using System.Collections;
 
 public class EnemySpawner : MonoBehaviour
 {
-    [Header("Enemy Settings")]
     public GameObject enemyPrefab;
-    public float spawnInterval = 2f; // Time between spawns
-
-    [Header("Screen Bounds")]// We don't want enemies spawning directly on screen
-    public float minX = -8f;
-    public float maxX = 8f;
-    public float minY = -5f;
-    public float maxY = 5f;
-
-    [Header("Spawn Buffers")]//Spawning should be a bit randomized off screen
-    public float xBuffer = 5f;  
-    public float yBuffer = 2.5f;
+    public EnemyStats[] enemyTypes;
+    public float spawnInterval = 3f;
 
     void Start()
     {
-        StartCoroutine(SpawnEnemies());
+        // Start spawning immediately when the scene loads
+        StartCoroutine(SpawnCoroutine());
     }
 
-    IEnumerator SpawnEnemies()
+    IEnumerator SpawnCoroutine()
     {
-        while (true) 
+        while (true)
         {
-            Vector3 spawnPos = GetOffScreenPosition();
-            Instantiate(enemyPrefab, spawnPos, Quaternion.identity);
+            SpawnEnemy();
             yield return new WaitForSeconds(spawnInterval);
-            spawnInterval -= 0.01f; // Decrease spawn interval over time to increase difficulty
         }
     }
 
-    Vector3 GetOffScreenPosition() // Returns a random position just outside the screen view so player can't see spawn
+    void SpawnEnemy()
     {
-        float x, y;
-        bool spawnLeftOrRight = Random.value > 0.5f;
+        // Pick a random enemy type
+        EnemyStats chosenStats = enemyTypes[Random.Range(0, enemyTypes.Length)];
 
-        if (spawnLeftOrRight)
-        {
-          
-            x = Random.value > 0.5f ? minX - xBuffer : maxX + xBuffer;
-            y = Random.Range(minY - yBuffer, maxY + yBuffer);
-        }
-        else
-        {
-        
-            x = Random.Range(minX - xBuffer, maxX + xBuffer);
-            y = Random.value > 0.5f ? minY - yBuffer : maxY + yBuffer;
-        }
+        // Random X outside screen bounds
+        float x = Random.value < 0.5f ? Random.Range(-14f, -9f) : Random.Range(9f, 14f);
 
-        return new Vector3(x, y, 0f);
+        // Random Y outside screen bounds
+        float y = Random.value < 0.5f ? Random.Range(-11f, -6f) : Random.Range(6f, 11f);
+
+        Vector3 spawnPos = new Vector3(x, y, 0f);
+        GameObject enemy = Instantiate(enemyPrefab, spawnPos, Quaternion.identity);
+
+        // Assign stats
+        EnemyHealth health = enemy.GetComponent<EnemyHealth>();
+        if (health != null)
+            health.stats = chosenStats;
+
+        // Assign speed to follow script
+        EnemyFollow follow = enemy.GetComponent<EnemyFollow>();
+        if (follow != null)
+            follow.speed = chosenStats.moveSpeed;
     }
 }

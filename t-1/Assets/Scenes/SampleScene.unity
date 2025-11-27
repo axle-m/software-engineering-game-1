@@ -522,13 +522,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemySpawner
   enemyPrefab: {fileID: 4975163306469456962, guid: 8ad377f47ca234642a25b98c48ec563a, type: 3}
+  enemyTypes:
+  - {fileID: 11400000, guid: 474a91923be9c874ebb50ff17438061f, type: 2}
+  - {fileID: 11400000, guid: 0c505cb0c36453940930f870bf1083c1, type: 2}
+  - {fileID: 11400000, guid: 0e7c978d2035ae845b35eec787363bd7, type: 2}
   spawnInterval: 4
-  minX: -8
-  maxX: 8
-  minY: -5
-  maxY: 5
-  xBuffer: 5
-  yBuffer: 2.5
 --- !u!4 &1275233693
 Transform:
   m_ObjectHideFlags: 0

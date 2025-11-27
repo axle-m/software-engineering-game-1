@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5577302849689554178}
   - component: {fileID: 5166944597855408484}
   - component: {fileID: 589740131782679708}
+  - component: {fileID: -7072525780375783008}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -105,3 +106,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyFollow
   player: {fileID: 0}
   speed: 3
+--- !u!114 &-7072525780375783008
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4975163306469456962}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d498e3278039bf45b5bf3cb67e2d13c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyHealth
+  stats: {fileID: 0}
