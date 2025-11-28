@@ -63,12 +63,21 @@ public class PlayerController : MonoBehaviour
     }
 
     void UpdateState()
-    {
-        //flip with movement direction
-        transform.localScale = new Vector3(xAxis == 0 ? transform.localScale.x : Mathf.Sign(xAxis) * Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+{
+    // Uses cursor direction to flip sprite
+    Vector3 mouseScreen = Mouse.current.position.ReadValue();
+    Vector3 mouseWorld = Camera.main.ScreenToWorldPoint(
+        new Vector3(mouseScreen.x, mouseScreen.y, Mathf.Abs(Camera.main.transform.position.z - transform.position.z))
+    );
 
-        updateAttackDir();
-    }
+    if (mouseWorld.x > transform.position.x)
+        transform.localScale = new Vector3(-Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+    else
+        transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+
+    updateAttackDir();
+}
+
 
     void updateAttackDir()
     {
@@ -152,7 +161,7 @@ private IEnumerator AttackCoroutine()
     Debug.Log("Attack executed!");
 
     
-    yield return new WaitForSeconds(0.5f);
+    yield return new WaitForSeconds(0.25f);
 
     canAttack = true; 
 }
