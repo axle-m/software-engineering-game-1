@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
     [Header("Player Settings")]
     public int maxPlayerHealth = 100;
     public int currentPlayerHealth;
+    public GameOverScript gameOver;
 
     private void Awake()
     {
@@ -42,7 +43,7 @@ public class GameManager : MonoBehaviour
     private void PlayerDied()
     {
         Debug.Log("Player died! Game Over!");
-        
+        gameOver.Setup();
     }
 
     public void HealPlayer(int amount)
