@@ -5,11 +5,15 @@ public class EnemyFollow : MonoBehaviour
     public Transform player;
     public float speed = 3f;
 
+    [Header("Optional Scaling")]
+    public float sizeMultiplier = 1f;
+
     private EnemyHealth healthScript;
+    private SpriteRenderer sr;
 
     void Start()
     {
-        // Automatically find the player if not assigned
+        
         if (player == null)
         {
             GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
@@ -23,17 +27,28 @@ public class EnemyFollow : MonoBehaviour
             }
         }
 
-        // Get EnemyHealth component to read stats
+      
         healthScript = GetComponent<EnemyHealth>();
         if (healthScript != null && healthScript.stats != null)
         {
-            speed = healthScript.stats.moveSpeed; // assign speed from ScriptableObject
+            speed = healthScript.stats.moveSpeed; 
         }
+
+        
+        sr = GetComponent<SpriteRenderer>();
+        if (sr == null)
+        {
+            Debug.LogWarning("No SpriteRenderer found! Flipping will not work.");
+        }
+
+        
+        transform.localScale = Vector3.one * sizeMultiplier;
     }
 
     void Update()
     {
         Follow();
+        FacePlayer();
     }
 
     void Follow()
@@ -45,5 +60,23 @@ public class EnemyFollow : MonoBehaviour
             player.position,
             speed * Time.deltaTime
         );
+    }
+
+    void FacePlayer()
+    {
+        if (sr == null || player == null) return;
+
+        
+        if (player.position.x > transform.position.x)
+            sr.flipX = true;
+        else
+            sr.flipX = false;
+    }
+
+    
+    public void SetSize(float scalar)
+    {
+        sizeMultiplier = scalar;
+        transform.localScale = Vector3.one * sizeMultiplier;
     }
 }

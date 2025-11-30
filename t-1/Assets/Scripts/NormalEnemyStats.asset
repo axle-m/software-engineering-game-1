@@ -16,3 +16,5 @@ MonoBehaviour:
   maxHealth: 75
   moveSpeed: 3
   attackDamage: 8
+  enemySprite: {fileID: 3988971947158227194, guid: 7a8422b85ad6c1947b2fc71616c8d99f, type: 3}
+  spriteScale: 2

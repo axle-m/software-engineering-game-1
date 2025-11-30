@@ -7,4 +7,6 @@ public class EnemyStats : ScriptableObject
     public int maxHealth = 100;
     public float moveSpeed = 3f;
     public int attackDamage = 10;
+    public Sprite enemySprite;     // Assign your sprite here
+    public float spriteScale = 1f; // Scale for the sprite 
 }
