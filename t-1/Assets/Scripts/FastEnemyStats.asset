@@ -15,6 +15,6 @@ MonoBehaviour:
   enemyName: 
   maxHealth: 50
   moveSpeed: 4
-  attackDamage: 6
+  attackDamage: 5
   enemySprite: {fileID: -5941057859495519312, guid: e5e482db33d5a3a44ba57bef3e6dcba2, type: 3}
-  spriteScale: 1.5
+  spriteScale: 2

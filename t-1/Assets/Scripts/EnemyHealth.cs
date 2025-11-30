@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class EnemyHealth : MonoBehaviour
 {
-    public EnemyStats stats;  // Assign your ScriptableObject here
+    public EnemyStats stats;  
     private int currentHealth;
 
     void Start()

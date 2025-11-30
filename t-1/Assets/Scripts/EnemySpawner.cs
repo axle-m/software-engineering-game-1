@@ -43,6 +43,10 @@ public class EnemySpawner : MonoBehaviour
             follow.player = player;
             follow.SetSize(1f);
         }
+        EnemyAttack attack = enemy.GetComponent<EnemyAttack>();
+        if (attack != null)
+            attack.enemyStats = chosenStats; 
+
 
         SpriteRenderer sr = enemy.GetComponent<SpriteRenderer>();
         if (sr != null && chosenStats.enemySprite != null)

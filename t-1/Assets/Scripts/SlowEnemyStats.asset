@@ -17,4 +17,4 @@ MonoBehaviour:
   moveSpeed: 2
   attackDamage: 10
   enemySprite: {fileID: 865399086327178393, guid: dd7eccbb268a30041beb287efd21924e, type: 3}
-  spriteScale: 3
+  spriteScale: 4
