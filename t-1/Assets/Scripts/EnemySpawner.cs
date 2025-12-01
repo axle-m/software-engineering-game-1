@@ -19,6 +19,8 @@ public class EnemySpawner : MonoBehaviour
         {
             SpawnEnemy();
             yield return new WaitForSeconds(spawnInterval);
+            if(spawnInterval > 0.5f)
+            spawnInterval -= 0.05f;
         }
     }
 
