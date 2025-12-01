@@ -54,14 +54,14 @@ public class PlayerController : MonoBehaviour
         Move();
         Dash();
         Attack();
-        bool moving = moveAction.ReadValue<Vector2>().sqrMagnitude > 0.01f;
+        //bool moving = moveAction.ReadValue<Vector2>().sqrMagnitude > 0.01f;
         //play proper animation
-        if(moving){
-            anim.SetBool("isMoving", true);
-        }
-        else{
-            anim.SetBool("isMoving", false);
-        }
+        //if(moving){
+        //    anim.SetBool("isMoving", true);
+        //}
+        //else{
+        //    anim.SetBool("isMoving", false);
+        //}
     }
 
     void GetInput()
@@ -147,7 +147,7 @@ private IEnumerator AttackCoroutine()
     if (!canAttack) yield break; // exit if still in cooldown
     canAttack = false;
     //play attack animation/make transition to it
-    anim.SetTrigger("Attack");
+    //anim.SetTrigger("Attack");
     // Detect enemies in the attack range
     Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(
         attackPoint.position,  // center of attack
