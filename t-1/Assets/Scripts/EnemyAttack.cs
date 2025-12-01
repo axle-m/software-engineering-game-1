@@ -2,14 +2,21 @@ using UnityEngine;
 
 public class EnemyAttack : MonoBehaviour
 {
-    public EnemyStats enemyStats; // Reference to ScriptableObject containing stats
+    public EnemyStats enemyStats;
 
     private void Start()
     {
-        
-        if (enemyStats == null)
+        if (enemyStats != null && GameManager.Instance != null)
         {
-            Debug.LogError($"{gameObject.name} does not have an EnemyStats assigned! Ensure that this is set in the Inspector.");
+            enemyStats.OnAttackPlayer += GameManager.Instance.HandleEnemyAttack;
+        }
+    }
+
+    private void OnDestroy()
+    {
+        if (enemyStats != null && GameManager.Instance != null)
+        {
+            enemyStats.OnAttackPlayer -= GameManager.Instance.HandleEnemyAttack;
         }
     }
 
@@ -17,16 +24,7 @@ public class EnemyAttack : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            
-            if (enemyStats != null)
-            {
-                Debug.Log($"{gameObject.name} hit {collision.name} for {enemyStats.attackDamage} damage!");
-                GameManager.Instance.TakePlayerDamage(enemyStats.attackDamage); // Apply damage to the player
-            }
-            else
-            {
-                Debug.LogError("EnemyStats is missing! Cannot apply damage.");
-            }
+            enemyStats.NotifyPlayerAttacked();
         }
     }
 }

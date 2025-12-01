@@ -1448,6 +1448,7 @@ MonoBehaviour:
   maxPlayerHealth: 100
   currentPlayerHealth: 100
   gameOver: {fileID: 1574334649}
+  playerHealth: {fileID: 1470260616}
 --- !u!4 &1149484995
 Transform:
   m_ObjectHideFlags: 0
@@ -2039,6 +2040,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerHealth
   maxHealth: 100
   currentHealth: 100
+  gameOver: {fileID: 1574334649}
   healthBar: {fileID: 1113884885}
 --- !u!50 &1470260617
 Rigidbody2D:
