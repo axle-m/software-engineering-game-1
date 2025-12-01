@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -22,8 +23,21 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
 
         currentPlayerHealth = maxPlayerHealth;
+
+        SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
+    private void OnDestroy()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        gameOver = FindAnyObjectByType<GameOverScript>(FindObjectsInactive.Include);
+
+        currentPlayerHealth = maxPlayerHealth;
+    }
     public void TakePlayerDamage(int damage)
     {
         currentPlayerHealth -= damage;
@@ -44,6 +58,7 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("Player died! Game Over!");
         gameOver.Setup();
+
     }
 
     public void HealPlayer(int amount)

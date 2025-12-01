@@ -14,11 +14,9 @@ public class GameOverScript : MonoBehaviour
     }
     public void RestartButton(){
         SceneManager.LoadScene("SampleScene");
-        gameManager.HealPlayer(100);
 
     }
     public void ExitButton(){
         SceneManager.LoadScene("StartMenu");
-        gameManager.HealPlayer(100);
     }
 }
