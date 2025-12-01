@@ -10,8 +10,6 @@ public class GameManager : MonoBehaviour
     public int currentPlayerHealth;
     public GameOverScript gameOver;
 
-    public PlayerHealth playerHealth;
-
     private void Awake()
     {
         
@@ -27,23 +25,6 @@ public class GameManager : MonoBehaviour
         currentPlayerHealth = maxPlayerHealth;
 
         SceneManager.sceneLoaded += OnSceneLoaded;
-        SubscribeToAllEnemies();
-        if (playerHealth != null)
-    {
-        playerHealth.OnPlayerDied += PlayerDied; 
-    }
-    }
-    private void SubscribeToAllEnemies()
-    {
-        // Find all EnemyAttack scripts in the scene
-        EnemyAttack[] allEnemies = FindObjectsOfType<EnemyAttack>();
-        foreach (var enemy in allEnemies)
-        {
-            if (enemy.enemyStats != null)
-            {
-                enemy.enemyStats.OnAttackPlayer += HandleEnemyAttack;
-            }
-        }
     }
 
     private void OnDestroy()
@@ -56,14 +37,6 @@ public class GameManager : MonoBehaviour
         gameOver = FindAnyObjectByType<GameOverScript>(FindObjectsInactive.Include);
 
         currentPlayerHealth = maxPlayerHealth;
-    }
-     public void HandleEnemyAttack(EnemyStats stats)
-    {
-        Debug.Log($"{stats.enemyName} attacked the player! (Handled in GameManager)");
-        if (playerHealth != null)
-    {
-        playerHealth.TakeDamage(stats.attackDamage);
-    }
     }
     public void TakePlayerDamage(int damage)
     {
