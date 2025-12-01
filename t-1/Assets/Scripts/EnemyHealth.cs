@@ -22,6 +22,8 @@ public class EnemyHealth : MonoBehaviour
     void Die()
     {
         Debug.Log($"{stats.enemyName} died!");
+        ScoreManager.instance.IncrementScore();
         Destroy(gameObject);
+
     }
 }

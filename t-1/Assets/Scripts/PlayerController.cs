@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour
     private PlayerStateList playerStateList;
     private float xAxis, yAxis;
     [SerializeField] private float moveSpeed = 5f;
-
+    public Animator anim;
     #nullable enable
     private Transform ?attackPoint;
     [SerializeField] private float attackRange = 1.5f;
@@ -54,6 +54,14 @@ public class PlayerController : MonoBehaviour
         Move();
         Dash();
         Attack();
+        //bool moving = moveAction.ReadValue<Vector2>().sqrMagnitude > 0.01f;
+        //play proper animation
+        //if(moving){
+        //    anim.SetBool("isMoving", true);
+        //}
+        //else{
+        //    anim.SetBool("isMoving", false);
+        //}
     }
 
     void GetInput()
@@ -138,7 +146,8 @@ private IEnumerator AttackCoroutine()
 {
     if (!canAttack) yield break; // exit if still in cooldown
     canAttack = false;
-
+    //play attack animation/make transition to it
+    //anim.SetTrigger("Attack");
     // Detect enemies in the attack range
     Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(
         attackPoint.position,  // center of attack
@@ -147,14 +156,14 @@ private IEnumerator AttackCoroutine()
     );
 
     foreach (Collider2D enemyCollider in hitEnemies)
-{
-    Debug.Log("Hit: " + enemyCollider.name);
-    EnemyHealth enemyHealth = enemyCollider.GetComponent<EnemyHealth>();
-    if (enemyHealth != null)
     {
-        enemyHealth.TakeDamage(25);
+        Debug.Log("Hit: " + enemyCollider.name);
+        EnemyHealth enemyHealth = enemyCollider.GetComponent<EnemyHealth>();
+        if (enemyHealth != null)
+        {
+            enemyHealth.TakeDamage(25);
+        }
     }
-}
 
 
     
