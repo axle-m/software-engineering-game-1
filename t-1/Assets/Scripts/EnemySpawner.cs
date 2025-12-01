@@ -34,17 +34,17 @@ public class EnemySpawner : MonoBehaviour
 
         GameObject enemy = Instantiate(enemyPrefab, spawnPos, Quaternion.identity);
 
-        EnemyHealth health = enemy.GetComponent<EnemyHealth>();
-        if (health != null)
-            health.stats = chosenStats;
-
         EnemyFollow follow = enemy.GetComponent<EnemyFollow>();
         if (follow != null)
         {
+            follow.sizeMultiplier = 1.5f;
             follow.speed = chosenStats.moveSpeed;
             follow.player = player;
-            follow.SetSize(1f);
         }
+
+        EnemyHealth health = enemy.GetComponent<EnemyHealth>();
+        if (health != null)
+            health.stats = chosenStats;
         EnemyAttack attack = enemy.GetComponent<EnemyAttack>();
         if (attack != null)
             attack.enemyStats = chosenStats; 
