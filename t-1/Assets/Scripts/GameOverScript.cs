@@ -9,9 +9,11 @@ public class GameOverScript : MonoBehaviour
     public TextMeshProUGUI scoreText;
     public CountdownScript countdown;
     public TextMeshProUGUI timerText;
+    public ScoreManager score;
 
     public void Setup() {
         gameObject.SetActive(true);
+        score.gameObject.SetActive(false);
         scoreText.gameObject.SetActive(false);
         timerText.gameObject.SetActive(false);
         countdown.gameObject.SetActive(false);
