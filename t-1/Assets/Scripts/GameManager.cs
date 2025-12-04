@@ -54,8 +54,17 @@ public class GameManager : MonoBehaviour
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         gameOver = FindAnyObjectByType<GameOverScript>(FindObjectsInactive.Include);
+        playerHealth = FindAnyObjectByType<PlayerHealth>();
+
+        if(playerHealth != null)
+        {
+            playerHealth.OnPlayerDied -= PlayerDied;
+            
+            playerHealth.OnPlayerDied += PlayerDied;
+        }
 
         currentPlayerHealth = maxPlayerHealth;
+        SubscribeToAllEnemies();
     }
      public void HandleEnemyAttack(EnemyStats stats)
     {

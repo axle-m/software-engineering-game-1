@@ -5,7 +5,6 @@ public class PlayerHealth : MonoBehaviour
 {
     public float maxHealth = 100f;
     public float currentHealth;
-    public GameOverScript gameOver;
     public Slider healthBar; 
 
     
@@ -46,8 +45,6 @@ public class PlayerHealth : MonoBehaviour
     void Die()
     {
         Debug.Log("Player died!");
-        gameOver.Setup();
-
         
         OnPlayerDied?.Invoke();
     }
