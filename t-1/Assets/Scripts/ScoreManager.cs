@@ -7,6 +7,7 @@ public class ScoreManager : MonoBehaviour
 
     public TextMeshProUGUI scoreText;
     public TextMeshProUGUI finalText;
+    public TextMeshProUGUI winScoreText;
     private int currentScore = 0;
 
     void Awake()
@@ -37,6 +38,7 @@ public class ScoreManager : MonoBehaviour
         {
             scoreText.text = "Killcount: " + currentScore.ToString();
             finalText.text = "Killcount: " + currentScore.ToString();
+            winScoreText.text = "Final Killcount: " + currentScore.ToString();
         }
     }
     

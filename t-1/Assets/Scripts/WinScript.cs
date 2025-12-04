@@ -1,26 +1,24 @@
 using UnityEngine;
+using TMPro;
 using System.Collections;
 using UnityEngine.SceneManagement;
-using TMPro;
 
-public class GameOverScript : MonoBehaviour
+public class WinScript : MonoBehaviour
 {
     public GameManager gameManager;
-    public TextMeshProUGUI scoreText;
-    public CountdownScript countdown;
     public TextMeshProUGUI timerText;
+    public TextMeshProUGUI scoreText;
 
     public void Setup() {
         gameObject.SetActive(true);
-        scoreText.gameObject.SetActive(false);
         timerText.gameObject.SetActive(false);
-        countdown.gameObject.SetActive(false);
+        scoreText.gameObject.SetActive(false);
     }
     public void RestartButton(){
         SceneManager.LoadScene("SampleScene");
 
     }
-    public void ExitButton(){
+    public void MenuButton(){
         SceneManager.LoadScene("StartMenu");
     }
 }
